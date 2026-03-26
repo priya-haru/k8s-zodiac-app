@@ -1,8 +1,4 @@
-A great `README.md` is like the "Storefront" for your project. It tells anyone visiting your GitHub exactly what the app does and how they can run it themselves.
 
-Copy the block below and save it as `README.md` in your `~/k8s-zodiac-app/` folder.
-
----
 
 ### 📝 The README.md Content
 
