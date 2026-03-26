@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: api-container
-          image: priya77/zodiac-api:v1  # Your docker username added here
+          image: priya77/zodiac-api:v3  # Your docker username added here
           ports:
             - containerPort: 5000
 ---
