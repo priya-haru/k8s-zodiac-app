@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zodiac-api
+  namespace: zodiac-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: zodiac-api
+  template:
+    metadata:
+      labels:
+        app: zodiac-api
+    spec:
+      containers:
+        - name: api-container
+          image: priya77/zodiac-api:v1  # Your docker username added here
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zodiac-api
+  namespace: zodiac-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5000
+      targetPort: 5000
+  selector:
+    app: zodiac-api

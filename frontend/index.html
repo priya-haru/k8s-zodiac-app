@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>K8s Zodiac Finder</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; background: #2c3e50; color: white; }
+        .card { background: #34495e; padding: 20px; border-radius: 10px; display: inline-block; }
+        input { padding: 10px; margin: 10px; width: 60px; }
+        button { padding: 10px 20px; background: #e67e22; color: white; border: none; cursor: pointer; }
+        #result { margin-top: 20px; font-size: 20px; color: #f1c40f; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>✨ Zodiac Finder ✨</h2>
+        <input type="number" id="day" placeholder="Day">
+        <input type="number" id="month" placeholder="Month">
+        <br>
+        <button onclick="check()">Consult the Stars</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function check() {
+            const d = document.getElementById('day').value;
+            const m = document.getElementById('month').value;
+            const resDiv = document.getElementById('result');
+            
+            // MAGIC FIX: We use a prompt to get the dynamic Cloud Shell URL if localhost fails
+            // But for now, let's try the direct Port 5001 again with a 'mode: no-cors' hint
+            try {
+                const response = await fetch('http://localhost:5001/calculate', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({day: d, month: m})
+                });
+                const data = await response.json();
+                resDiv.innerText = "Sign: " + data.zodiac_sign;
+            } catch (e) {
+                resDiv.innerText = "Error: Check if Terminal Tab 1 is running Port 5001!";
+            }
+        }
+    </script>
+</body>
+</html>
